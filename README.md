@@ -1,56 +1,55 @@
-# Welcome to your Expo app 👋
+# Лабораторна робота №7: Використання Redux Toolkit для управління станом
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Опис проекту
+Цей проект є мобільним застосунком для онлайн-магазину, розробленим за допомогою React Native та Expo Router. Основний фокус роботи — реалізація глобального стану за допомогою **Redux Toolkit** та забезпечення персистентності даних за допомогою **redux-persist**.
 
-## Get started
+### Функціонал:
+- **Каталог товарів:** Перегляд списку товарів з цінами та описами.
+- **Деталі товару:** Окремий екран для перегляду детальної інформації про обраний товар.
+- **Кошик:** Додавання товарів, зміна кількості, видалення та автоматичний підрахунок загальної суми.
+- **Оформлення замовлення:** Форма з валідацією для введення даних користувача.
+- **Історія замовлень:** Перегляд списку всіх успішно оформлених замовлень.
+- **Збереження стану:** Використання `redux-persist` та `AsyncStorage` для збереження кошика, історії замовлень та даних користувача після перезапуску застосунку.
 
-1. Install dependencies
+## Інструкція з запуску
 
+1. **Встановлення залежностей:**
    ```bash
    npm install
    ```
 
-2. Start the app
-
+2. **Запуск проекту:**
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+3. **Вибір платформи:**
+   - Натисніть `a` для Android (потрібен емулятор або підключений пристрій).
+   - Натисніть `w` для веб-версії.
+   - Використовуйте застосунок **Expo Go** на смартфоні для сканування QR-коду.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Архітектура Redux
+Застосунок використовує централізоване сховище зі наступними слайсами:
+- `productsSlice`: зберігає каталог товарів.
+- `cartSlice`: керує станом кошика.
+- `usersSlice`: зберігає дані профілю користувача.
+- `ordersSlice`: зберігає історію замовлень.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Для збереження стану між сесіями налаштовано `redux-persist` з використанням `@react-native-async-storage/async-storage`.
 
-## Get a fresh project
+## Висновки (Відповіді на контрольні запитання)
 
-When you're ready, run:
+1. **Що таке глобальний стан у React Native?**
+   Глобальний стан — це сховище даних, яке доступне всім компонентам застосунку незалежно від їх рівня вкладеності. Це дозволяє уникнути передачі даних через пропси (prop drilling) та забезпечує синхронізацію даних між різними екранами.
 
-```bash
-npm run reset-project
-```
+2. **Для чого використовується Redux Toolkit?**
+   Redux Toolkit (RTK) — це офіційний набір інструментів для розробки з Redux. Він спрощує написання логіки Redux, зменшує кількість шаблонного коду, включає корисні утиліти (як-от `createSlice`) та забезпечує кращі практики "з коробки".
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+3. **Яке призначення createSlice?**
+   `createSlice` — це функція в RTK, яка дозволяє об'єднати визначення початкового стану, редюсерів та екшенів в одному місці. Вона автоматично генерує екшени на основі імен редюсерів.
 
-### Other setup steps
+4. **Для чого використовується configureStore?**
+   `configureStore` — це покращена заміна стандартному `createStore`. Вона автоматично об'єднує редюсери, підключає проміжне програмне забезпечення (middleware) та активує Redux DevTools.
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+5. **Для чого використовується redux-persist?**
+   `redux-persist` використовується для автоматичного збереження та відновлення стану Redux з локального сховища пристрою (AsyncStorage), що дозволяє зберігати дані користувача після перезапуску застосунку.
